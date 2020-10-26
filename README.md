@@ -1,7 +1,7 @@
 # google-maps-tools
 collection of scripts using Google Maps APIs
 
-# requirements
+## Requirements
 1. Python >= 3.7
 2. [pandas](https://pypi.org/project/pandas/)
 2. [geopandas](https://pypi.org/project/geopandas/)
