@@ -12,7 +12,7 @@ collection of scripts using Google Maps APIs
 
 ## google-maps-scraper
 Scrape Places from Google Maps
-* input: place type, country, search radius
+* input: place type, country, bounding box of the AOI, search radius
 * output: one table (csv) and one shapefile (gpkg) with place coordinates and details: phone number, website, type
 
 See in-code comments for more details.
