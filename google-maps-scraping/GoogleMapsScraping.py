@@ -4,7 +4,7 @@ Created on Wed May 22 11:49:32 2019
 
 @author: Jacopo Margutti
 
-this is a script to extract "places" from Google maps using its API
+this is a script to extract "Places" from Google maps using its API
 API documentation: https://developers.google.com/places/web-service/search
 
 configurable settings:
@@ -30,17 +30,16 @@ gmaps = googlemaps.Client(key='<my-API-key>')
 
 # SETTINGS #############################################################################################################
 
-# WHAT DO YOU WANT TO SEARCH FOR
+# TYPES OF PLACES TO SEARCH FOR
 # use only supported types, see https://developers.google.com/places/web-service/supported_types
-search_words_manual = ['school', 'primary_school', 'secondary_school', 'university']
+types_to_search = ['school', 'primary_school', 'secondary_school', 'university']
 
 # IN WHICH COUNTRY
 search_country = 'Lebanon'  # set False if you do not care about the country
 
 # IN WHICH BOUNDING BOX
-# N.B. standard format (e.g. https://boundingbox.klokantech.com/) is [long_start, lat_start, long_end, lat_end]
-# write longitudes and latitudes in correct order, because it is not checked anywhere
-# also, the script can not handle crossing -180/180 longitude
+# lat/lon of the area of interest,
+# standard format (e.g. https://boundingbox.klokantech.com/) is [long_start, lat_start, long_end, lat_end]
 lat_start = 33.797122
 lat_end = 33.926553
 long_start = 35.459023
@@ -205,12 +204,13 @@ for latitude in latitude_range:
                 continue
             countries_here = [search_country]
         len_s = len(total_search_results)
-        for search_word in search_words_manual:
+        for search_word in types_to_search:
             # print('searching for ', search_word)
             ## search aroung this place using current search word from the list
             new_total_search_results = text_search(latitude, longitude, search_word)
             if len(new_total_search_results) == 60:
                 print('WARNING: possible places missed (hit limit of 60 places)')
+                print('-------> consider increasing the search radius')
             total_search_results = total_search_results.append(new_total_search_results)
         print('----> found', len(total_search_results)-len_s, 'places')
         count_steps += 1
